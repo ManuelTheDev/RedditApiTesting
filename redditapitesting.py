@@ -1,3 +1,4 @@
+import sys
 import praw
 import json
 
@@ -7,26 +8,22 @@ user_agent = "testingAPI"
 username = "Manubilo"
 password = "werfault96"
 
-reddit = praw.Reddit(client_id=user_values['client_id'],
-client_secret=user_values['client_secret'],
-user_agent=user_values['user_agent'],
-username=user_values['username'],
-password=user_values['password'],)
 
-def create_reddit_object(json_file="reddit_config.json", json_key="reddit"):
-    with open(json_file) as f:
-        data = json.load(f)
-    
-    user_values = data[json.key]
+reddit = praw.Reddit(client_id=client_id, #
+client_secret=client_secret,
+user_agent=user_agent,
+username=username,
+password=password,)
 
-    reddit = praw.Reddit(client_id=user_values['client_id'],
-    client_secret=user_values['client_secret'],
-    user_agent=user_values['user_agent'],
-    username=user_values['username'],
-    password=user_values['password'],)
 
-    return reddit
+subred = reddit.subreddit("ios")
+hot= subred.hot(limit=11)
 
-reddit = create_reddit_object()
+type(hot)
 
-subred = reddit.subreddit("learnprogramming")
+x= next(hot)
+
+dir(x)
+
+for i in hot:
+    print(i.title, i.url)
